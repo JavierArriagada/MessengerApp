@@ -12,12 +12,10 @@ class Client
         fun getClient(url: String?) : Retrofit?
         {
             if (retrofit == null)
-            {
                 retrofit = Retrofit.Builder()
-                    .baseUrl(url)
+                    .baseUrl(url!!)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
-            }
             return retrofit
         }
     }

@@ -8,7 +8,7 @@ class Data
     private var title: String = ""
     private var sented: String = ""
 
-    constructor(){}
+    constructor()
     constructor(user: String, icon: Int, body: String, title: String, sented: String) {
         this.user = user
         this.icon = icon

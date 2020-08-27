@@ -70,8 +70,8 @@ class MainActivity : AppCompatActivity() {
                 {
                     viewPagerAdapter.addFragment(ChatsFragment(), "($countUnreadMessages) Chats")
                 }
-                viewPagerAdapter.addFragment(SearchFragment(), "Search")
-                viewPagerAdapter.addFragment(SettingsFragment(), "Settings")
+                viewPagerAdapter.addFragment(SearchFragment(), getString(R.string.search))
+                viewPagerAdapter.addFragment(SettingsFragment(), getString(R.string.settings))
 
                 viewPager.adapter = viewPagerAdapter
                 tabLayout.setupWithViewPager(viewPager)

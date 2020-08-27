@@ -26,7 +26,7 @@ class RegisterActivity : AppCompatActivity()
 
         val toolbar: Toolbar = findViewById(R.id.toolbar_register)
         setSupportActionBar(toolbar)
-        supportActionBar!!.title = "Register"
+        supportActionBar!!.title = getString(R.string.register)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener {
             val intent = Intent(this@RegisterActivity,WelcomeActivity::class.java)
@@ -49,16 +49,16 @@ class RegisterActivity : AppCompatActivity()
 
         if(username == "")
         {
-            Toast.makeText(this@RegisterActivity, "porfavor escriba username.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this@RegisterActivity, getString(R.string.please_user), Toast.LENGTH_LONG).show()
         }
         else if (email == "")
         {
-            Toast.makeText(this@RegisterActivity, "porfavor escriba email.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this@RegisterActivity, getString(R.string.please_email), Toast.LENGTH_LONG).show()
 
         }
         else if(password == "")
         {
-            Toast.makeText(this@RegisterActivity, "porfavor escriba password.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this@RegisterActivity, getString(R.string.please_password), Toast.LENGTH_LONG).show()
 
         }
         else

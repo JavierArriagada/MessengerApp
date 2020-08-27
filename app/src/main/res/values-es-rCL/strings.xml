@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MessengerApp</string>
+    <string name="action_settings">Configuración</string>
+    <string name="first_fragment_label">Primer Fragmento</string>
+    <string name="second_fragment_label">Segundo Fragmento</string>
+    <string name="next">Siguiente</string>
+    <string name="previous">Previo</string>
+    <string name="hello_first_fragment">Hola Primer Fragmento</string>
+    <string name="hello_second_fragment">Hola Segundo Fragmento. Arg: %1$s</string>
+    <string name="hello_blank_fragment">Hola Fragmento en Blanco</string>
+    <string name="login">Ingresar</string>
+    <string name="search">Buscar</string>
+    <string name="settings">Configuración</string>
+    <string name="message_first">Escriba un mensaje primero por favor</string>
+    <string name="failed">Falló</string>
+    <string name="received_image">Mandó una imagen</string>
+    <string name="register">Registrarse</string>
+    <string name="please_user">Porfavor ingrese un nombre de usuario</string>
+    <string name="please_password">Porfavor ingrese una contraseña</string>
+    <string name="please_email">Porfavor ingrese un email</string>
+    <string name="what_want">¿Que quiere hacer?</string>
+    <string name="successful">Actualizado Exitosamente</string>
+</resources>
