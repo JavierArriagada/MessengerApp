@@ -2,21 +2,18 @@ package com.example.messengerapp.AdapterClasses
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
+import android.content.res.Resources.getSystem
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.messengerapp.MainActivity
 import com.example.messengerapp.MessageChatActivity
 import com.example.messengerapp.ModelClasses.Users
 import com.example.messengerapp.R
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.user_search_item_layout.view.*
 
 class UserAdapter(
     mContext: Context,
@@ -24,19 +21,13 @@ class UserAdapter(
     isChatCheck: Boolean
     ) : RecyclerView.Adapter<UserAdapter.ViewHolder?>()
 {
-    private val mContext: Context
-    private val mUsers: List<Users>
-    private var isChatCheck: Boolean
-
-    init {
-        this.mUsers = mUsers
-        this.mContext = mContext
-        this.isChatCheck = isChatCheck
-    }
+    private val mContext: Context = mContext
+    private val mUsers: List<Users> = mUsers
+    private var isChatCheck: Boolean = isChatCheck
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view:View = LayoutInflater.from(mContext).inflate(R.layout.user_search_item_layout, viewGroup, false)
-            return UserAdapter.ViewHolder(view)
+            return ViewHolder(view)
     }
 
     override fun getItemCount(): Int {
@@ -55,20 +46,14 @@ class UserAdapter(
                 "Visit Profile"
             )
             val builder: AlertDialog.Builder = AlertDialog.Builder(mContext)
-            builder.setTitle("WHat you do want?")
-            builder.setItems(options, DialogInterface.OnClickListener { dialog, position ->
-                if(position == 0)
-                {
+            builder.setTitle("")
+            builder.setItems(options) { _, position ->
+                if (position == 0) {
                     val intent = Intent(mContext, MessageChatActivity::class.java)
-                    intent.putExtra("visit_id",user.getUID())
+                    intent.putExtra("visit_id", user.getUID())
                     mContext.startActivity(intent)
                 }
-                if(position == 1)
-                {
-
-                }
-
-            })
+            }
             builder.show()
         }
 

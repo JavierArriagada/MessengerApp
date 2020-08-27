@@ -14,12 +14,12 @@ import com.example.messengerapp.AdapterClasses.UserAdapter
 import com.example.messengerapp.ModelClasses.Users
 import com.example.messengerapp.R
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.fragment_search.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class SearchFragment : Fragment() {
@@ -46,17 +46,14 @@ class SearchFragment : Fragment() {
 
         searchEditText!!.addTextChangedListener(object : TextWatcher
         {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) =
+                Unit
 
             override fun onTextChanged(cs: CharSequence?, start: Int, before: Int, count: Int) {
-                searchForUsers(cs.toString().toLowerCase())
+                searchForUsers(cs.toString().toLowerCase(Locale.ROOT))
             }
 
-            override fun afterTextChanged(s: Editable?) {
-
-            }
+            override fun afterTextChanged(s: Editable?) = Unit
 
         })
 
@@ -64,7 +61,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun retrieveAllUsers() {
-        var firebaseUserID = FirebaseAuth.getInstance().currentUser!!.uid
+        val firebaseUserID = FirebaseAuth.getInstance().currentUser!!.uid
 
         val refUsers = FirebaseDatabase.getInstance().reference.child("Users")
 
@@ -88,15 +85,13 @@ class SearchFragment : Fragment() {
 
             }
 
-            override fun onCancelled(p0: DatabaseError) {
-
-            }
+            override fun onCancelled(p0: DatabaseError) = Unit
         })
     }
 
     private fun searchForUsers(str : String)
     {
-        var firebaseUserID = FirebaseAuth.getInstance().currentUser!!.uid
+        val firebaseUserID = FirebaseAuth.getInstance().currentUser!!.uid
 
         val queryUsers = FirebaseDatabase.getInstance().reference
             .child("Users").orderByChild("search")
@@ -117,9 +112,7 @@ class SearchFragment : Fragment() {
                 userAdapter = UserAdapter(context!!, mUsers!!, false)
             }
 
-            override fun onCancelled(p0: DatabaseError) {
-
-            }
+            override fun onCancelled(p0: DatabaseError) = Unit
         })
     }
 

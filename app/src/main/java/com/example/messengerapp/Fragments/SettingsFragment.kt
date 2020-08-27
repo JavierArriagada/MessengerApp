@@ -3,7 +3,6 @@ package com.example.messengerapp.Fragments
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.ProgressDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -35,8 +34,8 @@ import kotlinx.android.synthetic.main.fragment_settings.view.*
  */
 class SettingsFragment : Fragment()
 {
-    var usersReference: DatabaseReference?= null
-    var firebaseUser: FirebaseUser? = null
+    private var usersReference: DatabaseReference?= null
+    private var firebaseUser: FirebaseUser? = null
     private val RequestCode = 438;
     private var imageUris: Uri? = null
     private var storageRef: StorageReference?= null
@@ -68,14 +67,10 @@ class SettingsFragment : Fragment()
                 }
             }
 
-            override fun onCancelled(p0: DatabaseError) {
-
-            }
+            override fun onCancelled(p0: DatabaseError) = Unit
         })
 
-        view.profile_image_settings.setOnClickListener{
-            pickImage()
-        }
+        view.profile_image_settings.setOnClickListener { pickImage() }
 
         view.cover_image_settings.setOnClickListener{
             coverChecker = "cover"
@@ -104,76 +99,44 @@ class SettingsFragment : Fragment()
             AlertDialog.Builder(context, R.style.Theme_AppCompat_DayNight_Dialog_Alert)
 
         if(socialChecker == "website")
-        {
             builder.setTitle("Write URL:")
-        }
         else
-        {
             builder.setTitle("Write  username:")
-        }
 
         val editText = EditText(context)
 
-        if(socialChecker == "website")
-        {
-            editText.hint = "e.g www.google.com"
-        }
-        else
-        {
-            editText.hint = "e.g asdf"
-        }
+        editText.hint =  if(socialChecker == "website") "e.g www.google.com" else "e.g asdf"
         builder.setView(editText)
 
-        builder.setPositiveButton("Create", DialogInterface.OnClickListener{
-            dialog, which ->
+        builder.setPositiveButton("Create") { _, _ ->
             val str = editText.text.toString()
 
             if (str == "")
-            {
-                Toast.makeText(context,"Please write something...", Toast.LENGTH_LONG).show()
-
-            }
+                Toast.makeText(context, "Please write something...", Toast.LENGTH_LONG).show()
             else
-            {
                 saveSocialLink(str)
-            }
-        })
+        }
 
-        builder.setNegativeButton("Cancel", DialogInterface.OnClickListener{
-                    dialog, which ->
-                dialog.cancel()
-
-        })
+        builder.setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
         builder.show()
     }
 
     private fun saveSocialLink(str: String)
     {
-        val mapSocial = HashMap<String,Any>()
+        val mapSocial = HashMap<String?,Any>()
 
-        when(socialChecker)
+        mapSocial[socialChecker] = when(socialChecker)
         {
-            "facebook" ->
-            {
-                mapSocial["facebook"] = "https://m.facebook.com/$str"
-            }
-            "instagram" ->
-            {
-                mapSocial["instagram"] = "https://m.instagram.com/$str"
-            }
-            "website" ->
-            {
-                mapSocial["website"] = "https:/$str"
-            }
+            "facebook" -> "https://m.facebook.com/$str"
+            "instagram" -> "https://m.instagram.com/$str"
+            "website" -> "https:/$str"
+            else -> ""
         }
 
         usersReference!!.updateChildren(mapSocial).addOnCompleteListener{
             task ->
             if (task.isSuccessful)
-            {
-                Toast.makeText(context,"updated Successfully", Toast.LENGTH_LONG).show()
-
-            }
+                Toast.makeText(context, getString(R.string.successful), Toast.LENGTH_LONG).show()
         }
     }
 
@@ -210,11 +173,7 @@ class SettingsFragment : Fragment()
 
             uploadTask.continueWithTask(Continuation <UploadTask.TaskSnapshot, Task<Uri>>{task ->
                 if (!task.isSuccessful)
-                {
-                    task.exception?.let {
-                        throw it
-                    }
-                }
+                    task.exception?.let { throw it }
                 return@Continuation fileRef.downloadUrl
             }).addOnCompleteListener{ task ->
                 if(task.isSuccessful)

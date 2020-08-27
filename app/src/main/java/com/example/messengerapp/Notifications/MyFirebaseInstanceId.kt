@@ -15,9 +15,7 @@ class MyFirebaseInstanceId : FirebaseMessagingService()
         val refreshToken = FirebaseInstanceId.getInstance().token
 
         if (firebaseUser != null)
-        {
             updateToken(refreshToken)
-        }
     }
 
     private fun updateToken(refreshToken: String?)

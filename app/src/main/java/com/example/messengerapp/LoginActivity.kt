@@ -20,7 +20,7 @@ class LoginActivity : AppCompatActivity()
 
         val toolbar: Toolbar = findViewById(R.id.toolbar_login)
         setSupportActionBar(toolbar)
-        supportActionBar!!.title = "Login"
+        supportActionBar!!.title = getString(R.string.login)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener {
             val intent = Intent(this@LoginActivity,WelcomeActivity::class.java)

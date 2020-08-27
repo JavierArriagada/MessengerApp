@@ -93,7 +93,7 @@ class MessageChatActivity : AppCompatActivity() {
             val message = text_message.text.toString()
             if (message == "")
             {
-                Toast.makeText(this@MessageChatActivity, "Please write a message, first ...", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@MessageChatActivity, getString(R.string.message_first), Toast.LENGTH_LONG).show()
 
             }
             else
@@ -205,7 +205,7 @@ class MessageChatActivity : AppCompatActivity() {
                         userIdVisit
 
                     )
-                    val sender = Sender(data!!, token!!.getToken().toString())
+                    val sender = Sender(data, token!!.getToken().toString())
 
                     apiService!!.sendNotification(sender)
                         .enqueue(object : Callback<MyResponse>
@@ -219,7 +219,7 @@ class MessageChatActivity : AppCompatActivity() {
                                 {
                                     if(response.body()!!.succes !== 1)
                                     {
-                                        Toast.makeText(this@MessageChatActivity, "Failed", Toast.LENGTH_LONG).show()
+                                        Toast.makeText(this@MessageChatActivity, getString(R.string.failed), Toast.LENGTH_LONG).show()
                                     }
                                 }
                             }
@@ -296,7 +296,7 @@ class MessageChatActivity : AppCompatActivity() {
                                         val user = p0.getValue(Users::class.java)
                                         if (notify)
                                         {
-                                            sendNotification(userIdVisit,user!!.getUserName(),"Sent you an image.")
+                                            sendNotification(userIdVisit,user!!.getUserName(),getString(R.string.received_image))
                                         }
                                         notify = false
                                     }
